@@ -21,18 +21,42 @@ namespace AuthApp
             var regPasswordBox = window.FindFirstDescendant(x => x.ByAutomationId("regPasswordBox")).AsTextBox();
             var regConfirmPasswordBox = window.FindFirstDescendant(x => x.ByAutomationId("regConfirmPasswordBox")).AsTextBox();
             var reg = window.FindFirstDescendant(x => x.ByText("Зарегистрироваться")).AsButton();
-            var confirm = window.FindFirstDescendant(x => x.ByAutomationId("2")).AsButton();
 
+            #region	Проверить что после нажатия на регистрацию выводится сообщение о необходимости заполнить все поля
             reg.Click();
-            confirm.Click();
+            window.FindFirstDescendant(x => x.ByAutomationId("2")).Click();
+            #endregion
+
             regLoginBox.Enter("drago");
 
+            #region Ввести простой пароль, не содержащий один и более из этих элементов: большие и маленькие буквы, спец. символы, цифры, или состоящий не из восьми символов
+            regPasswordBox.Enter("drago");
+            reg.Click();
+            window.FindFirstDescendant(x => x.ByAutomationId("2")).Click();
+            #endregion
+
+            #region Ввести разные пароли при регистрации
+            regPasswordBox.Enter("Dragon12!");
+            regConfirmPasswordBox.Enter("drago13!");
+            reg.Click();
+            window.FindFirstDescendant(x => x.ByAutomationId("2")).Click();
+            #endregion
+
+            #region Ввести пароль, соответствующий всем требованиям
+            regPasswordBox.Enter("Dragon12!");
+            regConfirmPasswordBox.Enter("Dragon12!");
+            reg.Click();
+            #endregion
+
+
+
             var loginBox = window.FindFirstDescendant(x => x.ByAutomationId("loginBox")).AsTextBox();
-            var PasswordBox = window.FindFirstDescendant(x => x.ByAutomationId("PasswordBox")).AsTextBox();
+            var passwordBox = window.FindFirstDescendant(x => x.ByAutomationId("passwordBox")).AsTextBox();
             var auth = window.FindFirstDescendant(x => x.ByText("Войти")).AsButton();
 
 
             loginBox.Enter("drago");
+            passwordBox.Enter("12132112");
 
 
             //var inputs = window.FindAllDescendants(x => x.ByControlType(FlaUI.Core.Definitions.ControlType.Edit));

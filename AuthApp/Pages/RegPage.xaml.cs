@@ -28,7 +28,7 @@ namespace AuthApp.Pages
 
         private void regButton_Click(object sender, RoutedEventArgs e)
         {
-            if (loginBox.Text == "" || passwordBox.Password == "" || confirmPasswordBox.Password == "")
+            if (regloginBox.Text == "" || passwordBox.Password == "" || confirmPasswordBox.Password == "")
             {
                 MessageBox.Show("Заполните все поля");
             }
@@ -42,7 +42,7 @@ namespace AuthApp.Pages
             }
             else
             {
-                UsersSingleton.Instance.Reg(loginBox.Text, passwordBox.Password);
+                UsersSingleton.Instance.Reg(regloginBox.Text, passwordBox.Password);
                 MessageBox.Show("Вы успешно зарегистрированы");
             }
         }
